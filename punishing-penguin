@@ -34,7 +34,7 @@ function fancy_message() {
     esac
 }
 
-echo "Rolling Rhino 🦏"
+echo "Punishing Penguin 🐧"
 
 # Take command line arguments
 while [ $# -gt 0 ]; do
@@ -67,28 +67,30 @@ if grep -q devel /etc/apt/sources.list; then
   exit 1
 fi
 
-OS_CODENAME=$(lsb_release --codename --short)
-OS_ID=$(lsb_release --id --short)
-if [ "${OS_ID}" == "Ubuntu" ]; then
-  fancy_message info "Ubuntu detected."
-else
-  fancy_message error "${OS_ID} detected, which is not supported."
-  exit 1
-fi
+# Hardcoding values to bypass these checks, since the ISO won't have standard Ubuntu values
+# 
+# OS_CODENAME=$(lsb_release --codename --short)
+# OS_ID=$(lsb_release --id --short)
+# if [ "${OS_ID}" == "Ubuntu" ]; then
+#   fancy_message info "Ubuntu detected."
+# else
+#   fancy_message error "${OS_ID} detected, which is not supported."
+#   exit 1
+# fi
 
-OS_DESCRIPTION=$(lsb_release --description --short)
-if [[ "${OS_DESCRIPTION}" == *"development branch"* ]]; then
-  fancy_message info "${OS_DESCRIPTION} detected."
-elif  [[ "${OS_DESCRIPTION}" == *"LTS"* ]]; then
-  fancy_message error "${OS_DESCRIPTION} detected. Switching a LTS release to the devel series directly is not supported."
-  exit 1
-else
-  fancy_message error "${OS_DESCRIPTION} detected. Switching an interim release to the devel series directly is not supported."
-  exit 1
-fi
+# OS_DESCRIPTION=$(lsb_release --description --short)
+# if [[ "${OS_DESCRIPTION}" == *"development branch"* ]]; then
+#   fancy_message info "${OS_DESCRIPTION} detected."
+# elif  [[ "${OS_DESCRIPTION}" == *"LTS"* ]]; then
+#   fancy_message error "${OS_DESCRIPTION} detected. Switching a LTS release to the devel series directly is not supported."
+#   exit 1
+# else
+#   fancy_message error "${OS_DESCRIPTION} detected. Switching an interim release to the devel series directly is not supported."
+#   exit 1
+# fi
 
 DESKTOP_FOUND=0
-for META in kubuntu-desktop lubuntu-desktop ubuntu-desktop ubuntu-budgie-desktop ubuntukylin-desktop ubuntu-mate-desktop ubuntustudio-desktop xubuntu-desktop ubuntu-wsl; do
+for META in kubuntu-desktop lubuntu-desktop ubuntu-desktop ubuntu-budgie-desktop ubuntukylin-desktop ubuntu-mate-desktop ubuntustudio-desktop xubuntu-desktop ubuntu-wsl nx-desktop dx-desktop; do
   INSTALLED=$(env LANG=C apt list --installed "${META}" 2>/dev/null | grep installed)
 
   if [ -n "${INSTALLED}" ]; then
@@ -185,7 +187,7 @@ EOF
     apt -y update
     apt -y dist-upgrade
     apt -y autoremove
-    fancy_message info "Your Rolling Rhino is ready."
+    fancy_message info "Your Punishing Penguin is ready."
 
-    cat "$(dirname "$0")/logo.txt"
+    cat "$(dirname "$0")/DDDominuXXX_logo.ansi.txt"
 fi
